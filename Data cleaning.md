@@ -134,8 +134,15 @@ MODIFY COLUMN `date` DATE;
 
 -- Removal of Null and blank values not necessary to the dataset
 
+-- I looked for the null values in the total_laid_off and percentage_laid_off column and I deleted the columns associated with it as it was unnecessary for data visualization 
+
 SELECT * FROM layoffs_static2
 WHERE total_laid_off IS NULL AND percentage_laid_off IS NULL;
+
+DELETE FROM layoffs_static2
+WHERE total_laid_off IS NULL AND percentage_laid_off IS NULL;
+
+-- I looked for the null values and the ones with blank spaces in industry. I noticed some industries where there are no values, where the company's values are present , some had values with those same companies.
 
 SELECT * FROM layoffs_static2
 where industry IS NULL OR 
@@ -147,18 +154,24 @@ ON t1.company = t2.company
 WHERE (t1.industry IS NULL OR t1.industry = '')
 AND t2.industry IS NOT NULL;
 
+-- So I updated the null industry values to the non-null industry values who have the same company but it didn't work
+
 UPDATE layoffs_static2 t1
 JOIN layoffs_static2 t2
 ON t1.company = t2.company
 SET t1.industry = t2.industry
 WHERE t1.industry IS NULL AND t2.industry IS NOT NULL; 
+
+-- So I set the industry where there are blank values to null and tried the code above again
  
 UPDATE layoffs_static2
 SET industry = NULL
 WHERE industry = '';
  
  SELECT * FROM layoffs_static2;
- 
+
+-- There was no use for the row_num, so I dropped the row_num column
+
  ALTER TABLE layoffs_static2
  DROP COLUMN row_num
 
