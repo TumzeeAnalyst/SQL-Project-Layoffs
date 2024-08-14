@@ -56,11 +56,14 @@ FROM layoffs_static2
 GROUP BY YEAR(`date`)
 ORDER BY 1 DESC;
 
+-- To know the sum of total layoffs by Month
+
 SELECT SUBSTRING(`date`, 1, 7) AS MONTH, SUM(total_laid_off)
 FROM layoffs_static2
 WHERE SUBSTRING(`date`, 1, 7) IS NOT NULL
 GROUP BY MONTH
 ORDER BY 1 ASC;
+
 
 WITH rolling_total AS 
 (
