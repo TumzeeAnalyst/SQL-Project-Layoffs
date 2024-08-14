@@ -77,15 +77,16 @@ ORDER BY 1 ASC
 SELECT `MONTH`, tlo, SUM(tlo) OVER (ORDER BY `MONTH`) AS Rolling_Total
 FROM rolling_total;
 
--- Sum of total layoffs by company and year
+-- Sum of total layoffs of company per year
 
 SELECT company, YEAR(`date`), SUM(total_laid_off)
 FROM layoffs_static2
 GROUP BY company, YEAR(`date`)
 ORDER BY company ASC;
 
--- To know the total layoffs of company per year
-WITH company_year(compay, years, total_laid_off)AS 
+-- To know the rank of the sum of total layoffs of company for each year to know which company had the most layoffs for each year
+
+WITH company_year(company, years, total_laid_off)AS 
 (
 SELECT company, YEAR(`date`), SUM(total_laid_off)
 FROM layoffs_static2
@@ -98,7 +99,9 @@ WHERE years IS NOT NULL
 ORDER BY ranking ASC
 )
 
+-- To know the ranking of the company per year, where the rank is not greater than 5
+
 SELECT * 
 FROM company_year_ranking 
-WHERE ranking <= 5
+WHERE ranking <= 5;
 ```
