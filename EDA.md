@@ -23,23 +23,33 @@ SELECT * FROM layoffs_static2
 WHERE percentage_laid_off = 1
 ORDER BY funds_raised_millions DESC;
 
+-- To know the sum of total layoffs by company
+
 SELECT company, SUM(total_laid_off)
 FROM layoffs_static2
 GROUP BY company
 ORDER BY 2 DESC;
 
+-- To know the date from when the layoff started and the end date
+
 SELECT MIN(`date`), MAX(`date`)
 FROM layoffs_static2;
+
+-- To know the sum of total layoffs by industry
 
 SELECT industry, SUM(total_laid_off)
 FROM layoffs_static2
 GROUP BY industry
 ORDER BY 2 DESC;
 
+-- To know the sum of total layoffs by country
+
 SELECT country, SUM(total_laid_off)
 FROM layoffs_static2
 GROUP BY country
 ORDER BY 2 DESC;
+
+-- To know the sum of total layoffs by Year
 
 SELECT YEAR(`date`), SUM(total_laid_off)
 FROM layoffs_static2
