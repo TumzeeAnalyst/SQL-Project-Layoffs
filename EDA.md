@@ -84,6 +84,7 @@ FROM layoffs_static2
 GROUP BY company, YEAR(`date`)
 ORDER BY company ASC;
 
+-- To know the total layoffs of company per year
 WITH company_year(compay, years, total_laid_off)AS 
 (
 SELECT company, YEAR(`date`), SUM(total_laid_off)
