@@ -1,6 +1,7 @@
 # EXPLORATORY DATA ANALYSIS
 ### PROJECT OVERVIEW
-This is the exploratory data analysis of the dataset using MySQL server
+This is the exploratory data analysis of the dataset using MySQL server.
+Here I am just going to explore the data, to find trends, patterns and outliers
 
 ### Dataset Source
 [Download here](https://www.kaggle.com/datasets/swaptr/layoffs-2022)
@@ -12,7 +13,11 @@ This is the exploratory data analysis of the dataset using MySQL server
 
 ```sql
 
+-- Here is the largest total layoffs 
+
 SELECT MAX(total_laid_off), MAX(percentage_laid_off) FROM layoffs_static2;
+
+-- Here are the details of the company which completely got laid off
 
 SELECT * FROM layoffs_static2
 WHERE percentage_laid_off = 1
