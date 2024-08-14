@@ -64,6 +64,7 @@ WHERE SUBSTRING(`date`, 1, 7) IS NOT NULL
 GROUP BY MONTH
 ORDER BY 1 ASC;
 
+-- Rolling total of layoffs per month
 
 WITH rolling_total AS 
 (
@@ -75,6 +76,8 @@ ORDER BY 1 ASC
 )
 SELECT `MONTH`, tlo, SUM(tlo) OVER (ORDER BY `MONTH`) AS Rolling_Total
 FROM rolling_total;
+
+-- Sum of total layoffs by company and year
 
 SELECT company, YEAR(`date`), SUM(total_laid_off)
 FROM layoffs_static2
